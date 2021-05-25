@@ -42,7 +42,7 @@ constexpr int   kTPB     = 64;  // threads per block
 constexpr int   kCorners = 4;
 constexpr int   kPoints  = 8;
 
-namespace retinanet {
+namespace odtk {
 namespace cuda {
 
 class Vector {
@@ -340,7 +340,7 @@ __global__ void iou_cuda_kernel(int const numBoxes, int const numAnchors,
         pad.x = 0.001f;
       else
         pad.x = 0.0f;
-      if (b_box_vals[(static_cast<int>(tid/numAnchors) * kCorners + b)].y == a_box_vals[(tid * kCorners + b) % (numAnchors * kCorners )].y)
+      if (b_box_vals[(static_cast<int>(tid/numAnchors) * kCorners + b)].y == a_box_vals[(tid * kCorners + b) % (numAnchors * kCorners)].y)
         pad.y = 0.001f;
       else
         pad.y = 0.0f;
@@ -386,5 +386,5 @@ int iou( const void *const *inputs, void *const *outputs, int num_boxes, int num
   return 0;
 }
 
-} 
+}
 }
